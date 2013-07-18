@@ -43,14 +43,14 @@ var loadChecks = function(checksfile) {
 };
 
 var checkHtmlFile = function(htmlfile, checksfile) {
-	console.log("Opening file=" + htmlfile);
+	//console.log("Opening file=" + htmlfile);
     $ = cheerio.load(fs.readFileSync(htmlfile));
     var out = checkDoc(checksfile);
 	dumpJson(out);
 };
 
 var checkUrl = function(url, checksfile) {
-	console.log("Opening url=" + url);
+	//console.log("Opening url=" + url);
 	rest.get(url).on('complete', function(result) {
 		if (result instanceof Error) {
 			console.log('Error: ' + result.message);
@@ -68,12 +68,12 @@ var checkDoc = function(checksfile) {
     for(var ii in checks) {
         var present = $(checks[ii]).length > 0;
         out[checks[ii]] = present;
-		console.log("checking: " + checks[ii] + "=" + present);
+		//console.log("checking: " + checks[ii] + "=" + present);
     }
     return out;
 };
 
-var dumpJson = function(json) {
+var dumpJson = function(checkJson) {
     var outJson = JSON.stringify(checkJson, null, 4);
     console.log(outJson);
 };
